@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\API\ChoiceController;
+use App\Http\Controllers\Api\QuestionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::name('api.')->prefix('v1')->group(function () {
+    Route::apiResource('questions', QuestionController::class);
+    Route::apiResource('questions.choices', ChoiceController::class)->only([
+        'store',
+    ]);
+    Route::apiResource('choices', ChoiceController::class)->only([
+        'update', 'destroy',
+    ]);
 });

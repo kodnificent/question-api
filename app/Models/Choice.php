@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Question extends Model
+class Choice extends Model
 {
     use HasFactory;
 
@@ -22,20 +22,12 @@ class Question extends Model
      * @var array
      */
     protected $fillable = [
-        'question',
-        'is_general',
-        'categories',
-        'point',
+        'description',
+        'is_correct_choice',
         'icon_url',
-        'duration',
     ];
 
-    /**
-     * Get all choices for this question.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function choices() {
-        return $this->hasMany(Choice::class);
+    public function question() {
+        return $this->belongsTo(Question::class);
     }
 }
