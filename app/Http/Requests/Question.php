@@ -25,7 +25,7 @@ class Question extends FormRequest
      */
     public function rules(Request $request)
     {
-        return $request->method('POST') ? $this->creationRules() : $this->updateRules();
+        return $request->method() === 'POST' ? $this->creationRules() : $this->updateRules();
     }
 
     /**

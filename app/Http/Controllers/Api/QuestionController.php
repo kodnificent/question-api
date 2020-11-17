@@ -53,7 +53,7 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        return response()->json(new QuestionResource($question));
+        return response()->json(new QuestionResource($question->load('choices')));
     }
 
     /**
@@ -76,7 +76,7 @@ class QuestionController extends Controller
 
         $question->update($data);
 
-        return response()->json(new QuestionResource($question));
+        return response()->json(new QuestionResource($question), 201);
     }
 
     /**

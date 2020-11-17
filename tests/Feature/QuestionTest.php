@@ -2,52 +2,74 @@
 
 namespace Tests\Feature;
 
+use App\Models\Choice;
+use App\Models\Question;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-class Question extends TestCase
+class QuestionTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function testUserCanStoreQuestion()
+    public function testUserCanUpdateQuestion()
     {
-        $response = $this->postJson(route('api.questions.store'), [
-            'question' => 'In which country is the humble ‘thumbs up’ gesture considered a great insult?',
-            'is_general' => true,
-            'categories' => 'physcometric',
-            'point' => 5,
-            // 'icon_url' => null,
-            'duration' => 10,
-            'choices' => [
-                [
-                    'choice' => 'USA',
-                    'is_correct_choice' => false,
-                ],
-                [
-                    'choice' => 'IRAN',
-                    'is_correct_choice' => true,
-                ],
-                [
-                    'choice' => 'PAKISTAN',
-                    'is_correct_choice' => true
-                ],
-                [
-                    'choice' => 'CHILE',
-                    'is_correct_choice' => FALSE,
-                ]
-            ]
+        $question = Question::factory()->create([
+            'question' => 'How old is you?'
         ]);
-        $response->dump();
 
-        $response->assertStatus(200);
-        $response->assertJsonStructure([
-            'message',
+        $formData = $question->toArray();
+        $formData['question'] = 'How old are you?';
+
+        $res = $this->putJson(route('api.questions.update', [ 'question' => $question->id]), $formData);
+        $res->assertStatus(201)
+            ->assertJson(['question' => $formData['question']]);
+    }
+
+    public function testUserCanViewQuestion()
+    {
+        $question = Question::factory()
+            ->has(Choice::factory()->count(4))
+            ->create();
+
+        $res = $this->getJson(route('api.questions.show', [ 'question' => $question->id]));
+
+        $res->assertStatus(200)
+            ->assertJsonStructure([
+                'question',
+                'is_general',
+                'category',
+                'point',
+                'icon_url',
+                'duration',
+                'choices'
+            ]);
+    }
+
+    public function testUserCanDeleteQuestion()
+    {
+        $question = Question::factory()
+            ->create();
+
+        $res = $this->deleteJson(route('api.questions.destroy', ['question' => $question->id]));
+        $res->assertStatus(200);
+
+        $this->assertDatabaseMissing('questions', ['id' => $question->id]);
+    }
+
+    public function testUserCanViewAllQuestions()
+    {
+        $question = Question::factory()
+            ->count(50)
+            ->has(Choice::factory()->count(4))
+            ->create();
+
+        $res = $this->getJson(route('api.questions.index'));
+
+        $res->dump();
+        $res->assertStatus(200);
+        $res->assertJsonStructure([
             'data'
         ]);
     }
