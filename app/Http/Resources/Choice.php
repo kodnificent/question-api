@@ -18,10 +18,10 @@ class Choice extends JsonResource
             'id' => $this->id,
             'description' => $this->description,
             'icon_url' => $this->icon_url,
-            // is_correct_choice is purposely ommitted
-            // so that we do not expose the answer to the api
-            // except when maybe a user has answered the question
-            // or has the right priviledges to view the answers.
+            'is_correct_choice' => $this->is_correct_choice
+            // in a production application, we can conditionally
+            // show is correct choice only to users with the
+            // right priviledges so that we do not expose the answer to the api
         ];
     }
 }

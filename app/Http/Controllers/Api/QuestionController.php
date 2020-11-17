@@ -25,9 +25,9 @@ class QuestionController extends Controller
 
         $questions = Question::when($categories, function ($query, $categories) {
             return $query->where('categories', $categories);
-        })->orderBy('id', 'desc')->simplePaginate();
+        })->orderBy('id', 'desc')->paginate();
 
-        return response()->json(QuestionResource::collection($questions));
+        return QuestionResource::collection($questions);
     }
 
     /**
@@ -53,7 +53,7 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        return response()->json(new QuestionResource($question->load('choices')));
+        return new QuestionResource($question->load('choices'));
     }
 
     /**
@@ -76,7 +76,7 @@ class QuestionController extends Controller
 
         $question->update($data);
 
-        return response()->json(new QuestionResource($question), 201);
+        return new QuestionResource($question);
     }
 
     /**

@@ -23,7 +23,7 @@ class ChoiceController extends Controller
         $attributes = $request->only(['description', 'is_correct_choice', 'icon_url']);
         $choice = $question->choices()->create($attributes);
 
-        return response()->json(new ChoiceResource($choice));
+        return new ChoiceResource($choice);
     }
 
     /**
@@ -38,7 +38,7 @@ class ChoiceController extends Controller
         $attributes = $request->only(['description', 'is_correct_choice', 'icon_url']);
         $choice->update($attributes);
 
-        return response()->json(new ChoiceResource($choice));
+        return new ChoiceResource($choice);
     }
 
     /**
