@@ -36,7 +36,7 @@ class Question extends FormRequest
     public function creationRules()
     {
         return [
-            'file' => ['required', 'questions_file', 'mimes:xlsx']
+            'question_file' => ['required', 'file', 'mimes:xlsx']
         ];
     }
 

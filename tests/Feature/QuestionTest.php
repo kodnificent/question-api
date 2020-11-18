@@ -5,6 +5,8 @@ namespace Tests\Feature;
 use App\Models\Choice;
 use App\Models\Question;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile as IlluminateUploadedFile;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Tests\TestCase;
 
 class QuestionTest extends TestCase
@@ -79,6 +81,20 @@ class QuestionTest extends TestCase
 
     public function testUserCanStoreQuestion()
     {
-        //
+        // $path = base_path('question_excel.xlsx');
+        // $file = IlluminateUploadedFile::createFromBase(
+        //     (new UploadedFile(
+        //         base_path('question_excel.xlsx'),
+        //         'question_excel.xlsx',
+        //     ))
+        // );
+        $res = $this->postJson(route('api.questions.store'), [
+            'question_file' => (new UploadedFile(
+                base_path('test-quest.xlsx'),
+                'test-quest.xlsx',
+            ))
+        ]);$res->dump();
+
+        $res->assertStatus(200);
     }
 }
