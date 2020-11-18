@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\ChoiceController;
-use App\Http\Controllers\Api\QuestionController;
+use App\Http\Controllers\API\QuestionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
