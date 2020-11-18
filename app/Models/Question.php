@@ -31,6 +31,15 @@ class Question extends Model
     ];
 
     /**
+     * The attributes that are cast to native types
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_general' => 'boolean'
+    ];
+
+    /**
      * Get all choices for this question.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

@@ -27,6 +27,15 @@ class Choice extends Model
         'icon_url',
     ];
 
+    /**
+     * The attributes that are cast to native types
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_correct_choice' => 'boolean'
+    ];
+
     public function question() {
         return $this->belongsTo(Question::class);
     }
