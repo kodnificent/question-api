@@ -15,7 +15,7 @@
 | --------- | ---- | ---------- | -------- | -------- |
 | GET       | `/api/v1/questions` | - | - | Get a list of all questions |
 | GET       | `/api/v1/questions/{question}/` | **question**: question id | Get details of a single question |
-| POST      | `/api/v1/questions` | - | **file**: .xlsx, .csv files are supported | Upload a spreadsheet file of questions |
+| POST      | `/api/v1/questions` | - | **question_file**: .xlsx, .csv files are supported | Upload a spreadsheet file of questions |
 | PUT       | `/api/v1/questions/{question}` | **question**: the id of the question | **question**: *required, string* <br>**is_general**: *required, boolean*<br>**categories**: *not required, string*<br>**point**: *required, integer*<br>**icon_url**: *not required, string* must be a valid url<br>**duration**: *required, integer* | Update a question |
 | DELETE    | `/api/v1/questions/{question}` | **question**: the id of the question | - | Delete a question |
 | POST      | `/api/v1/questions/{question}/choices` | **question**: question id | **description**: *required, string*<br>**is_correct_choice**: *required, boolean*<br>**icon_url**: *string* | Create a choice for a question |
