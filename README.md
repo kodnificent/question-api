@@ -1,6 +1,10 @@
-# Technologies
+# Question API
+A dockerized Laravel Crud Question application. 
+
+## Technologies Used
 - php 7.4
 - mysql 5.7
+- Nginx:latest
 
 ## Local environment setup
 
