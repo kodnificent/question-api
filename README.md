@@ -1,5 +1,5 @@
 # Question API
-A dockerized Laravel Crud Question application. 
+A Laravel Crud Question application. 
 
 ## Technologies Used
 - php 7.4
