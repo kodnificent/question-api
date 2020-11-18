@@ -10,7 +10,7 @@ A Laravel Crud Question application.
 
 1. Make a copy of `.env-example` and rename to `.env` and edit the variables accordingly.
 2. from the project root directory, cd into `.docker` folder.
-3. run the command `docker-composer up -d`
+3. run the command `docker-compose up -d`
 4. to run database migration, use the command `docker exec php php /var/www/html/artisan migrate`.
 
 ## API Documentation
