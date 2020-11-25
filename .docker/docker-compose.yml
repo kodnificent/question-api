@@ -3,6 +3,9 @@ version: "3"
 networks:
   laravel:
 
+volumes:
+  mysql_db_data:
+
 services:
   nginx:
     image: nginx:stable-alpine
@@ -26,11 +29,10 @@ services:
     ports:
       - "4306:3306"
     volumes:
-      - ./mysql:/var/lib/mysql
+      - mysql_db_data:/var/lib/mysql
     environment:
       MYSQL_DATABASE: question_api
       MYSQL_USER: root
-      MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: secret
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql

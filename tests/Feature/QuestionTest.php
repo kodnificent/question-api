@@ -81,19 +81,15 @@ class QuestionTest extends TestCase
 
     public function testUserCanStoreQuestion()
     {
-        // $path = base_path('question_excel.xlsx');
-        // $file = IlluminateUploadedFile::createFromBase(
-        //     (new UploadedFile(
-        //         base_path('question_excel.xlsx'),
-        //         'question_excel.xlsx',
-        //     ))
-        // );
-        $res = $this->postJson(route('api.questions.store'), [
-            'question_file' => (new UploadedFile(
+        $file = IlluminateUploadedFile::createFromBase(
+            (new UploadedFile(
                 base_path('test-quest.xlsx'),
                 'test-quest.xlsx',
             ))
-        ]);$res->dump();
+        );
+        $res = $this->postJson(route('api.questions.store'), [
+            'question_file' => $file
+        ]);
 
         $res->assertStatus(200);
     }

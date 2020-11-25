@@ -7,8 +7,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Row;
 use Maatwebsite\Excel\Concerns\OnEachRow;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class QuestionImport implements OnEachRow
+class QuestionImport implements OnEachRow, WithHeadingRow
 {
     /**
     * @param \Maatwebsite\Excel\Row $row

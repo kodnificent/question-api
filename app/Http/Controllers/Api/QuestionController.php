@@ -38,7 +38,7 @@ class QuestionController extends Controller
      */
     public function store(QuestionRequest $request)
     {
-        Excel::import(new QuestionImport, $request->file('questions_file'));
+        Excel::import(new QuestionImport, $request->file('question_file'));
 
         return response()->json([
             'message' => 'Questions imported successfully',

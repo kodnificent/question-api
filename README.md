@@ -1,13 +1,17 @@
-# Technologies
+# Technologies used
+
+- nginx
 - php 7.4
 - mysql 5.7
+- composer 2.0
 
 ## Local environment setup
 
 1. Make a copy of `.env-example` and rename to `.env` and edit the variables accordingly.
 2. from the project root directory, cd into `.docker` folder.
-3. run the command `docker-composer up -d`
-4. to run database migration, use the command `docker exec php php /var/www/html/artisan migrate`.
+3. run the command `docker-compose up -d`.
+4. to install composer dependencies, run `docker exec php composer install`.
+5. to run database migration, use the command `docker exec php php artisan migrate`.
 
 ## API Documentation
 
